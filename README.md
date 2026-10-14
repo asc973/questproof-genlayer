@@ -39,6 +39,19 @@ The contract source is not yet proven to deploy and run successfully on GenLayer
 
 After finalization, call `get_latest_review` to inspect the result. Capture the actual Studio transaction or Explorer address as evidence, not an invented one.
 
+## Verified Studio execution (2026-10-14)
+
+The user executed the AI review contract in GenLayer Studio and observed:
+
+- Deployed AI contract: accepted, deployment transaction **FINALIZED**.
+- `review_submission` write: **FINALIZED**.
+- `get_latest_review`: returned **PASS** with a reason explaining that the supplied sample text mentioned @GenLayer and explained staking/delegation in relation to decentralization.
+- The URL was a placeholder (`https://x.com/example/status/123456789`), so this verifies **AI assessment of supplied text**, not an external X post or its authorship.
+- Studio displayed an address shortened as `0xf8...157c`. The complete contract address and corresponding Explorer URL should be captured before citing them.
+- Frontend remains a **separate local rule-based demo**, not a connected blockchain app.
+
+Tested scenario: a positive example. Negative and ambiguous cases still need testing.
+
 ## Roadmap
 
 1. Verify contract deployment and review calls in Studio.

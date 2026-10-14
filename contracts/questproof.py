@@ -1,16 +1,17 @@
-# v0.3.0
+# v0.2.16
+# { "Depends": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6" }
 # QuestProof: an experimental GenLayer community quest reviewer.
 # The contract checks supplied text, not the authenticity of a live URL.
 import json
 import genlayer as gl
 
-class QuestProof(gl.contract.Contract):
+class QuestProof(gl.Contract):
     project_name: str
     latest_submission_url: str
     latest_result: str
     latest_reason: str
     latest_rule: str
-    review_count: int
+    review_count: u32
 
     def __init__(self) -> None:
         self.project_name = "QuestProof"

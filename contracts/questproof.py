@@ -4,6 +4,7 @@
 # The contract checks supplied text, not the authenticity of a live URL.
 import json
 import genlayer as gl
+from genlayer import u32
 
 class QuestProof(gl.Contract):
     project_name: str

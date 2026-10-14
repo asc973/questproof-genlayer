@@ -4,6 +4,15 @@ An experimental GenLayer Intelligent Contract proof of concept for reviewing com
 
 **Website:** https://asc973.github.io/questproof-genlayer/
 
+## AI contract candidate (new)
+
+- `contracts/questproof_ai.py` is the new GenLayer AI-review contract candidate, ready for a Studio deployment attempt. It has **not yet been deployed or validated on GenLayer**.
+- The previously tested `questproof.py` in Studio is a minimal storage/read prototype and should remain unchanged until the AI candidate is verified.
+- Inputs: `submission_url`, `submitted_text`, `quest_rules`. After the AI write transaction is finalized, call `get_latest_review` to inspect the verdict and reason.
+- Example submission URL: `https://x.com/example/status/123456789`
+- Example submission text: `@GenLayer staking and delegation support network security and decentralization.`
+- Example quest rules: `Mention @GenLayer and explain staking and delegation in relation to decentralization.`
+
 ## What is included
 
 - `index.html` — responsive project website with interactive **browser-only, rule-based demonstration**.

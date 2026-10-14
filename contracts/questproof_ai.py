@@ -46,11 +46,18 @@ class QuestProofAI(gl.Contract):
                       "and the reasoning must identify materially similar evidence. "
                       "Never accept claims of URL authenticity or publication without evidence."
         )
-        parts = response.split("|", 1)
+        # Some models prefix responses with "VERDICT|".
+        cleaned = response.strip().strip("`").strip()
+        if cleaned.upper().startswith("VERDICT|"):
+            cleaned = cleaned[len("VERDICT|"):]
+        parts = cleaned.split("|", 1)
         verdict = parts[0].strip().upper()
-        assert verdict in ("PASS", "FAIL", "REVIEW"), "Invalid review verdict"
-        reason = parts[1].strip() if len(parts) > 1 else "Check submission manually."
-        assert 0 < len(reason) <= 240, "Invalid reason length"
+        if verdict not in ("PASS", "FAIL", "REVIEW"):
+            verdict = "REVIEW"
+            reason = "Unexpected AI response format; manual review required."
+        else:
+            reason = parts[1].strip() if len(parts) > 1 else "Manual review required."
+        reason = reason[:240] if reason else "Manual review required."
         self.latest_verdict = verdict
         self.latest_reason = reason
         self.latest_url = submission_url

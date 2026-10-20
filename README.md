@@ -54,6 +54,12 @@ The user executed the AI review contract in GenLayer Studio and observed:
 
 Tested scenario: a positive example. Negative and ambiguous cases still need testing.
 
+## QuestProof V3 — organizer attestations and eligibility bookkeeping (unverified)
+
+New candidate: [`contracts/questproof_v3.py`](contracts/questproof_v3.py). Separate [Studio test plan](docs/v3-test-plan.md).
+
+V3 adds organizer-controlled on-chain participant attestation after a GitHub Raw check, plus a record of *off-chain* reward eligibility and fulfillment. It does **not** verify GitHub authorship with cryptographic proof or distribute tokens. This code is **not yet deployed or tested**. The published frontend is still a standalone simulation.
+
 ## QuestProof V2 — remediation candidate (NOT DEPLOYED)
 
 The original Projects submission was rejected because it classified user-supplied text without independently retrieving evidence, lacked an organizer-owned quest, and did not link results to eligibility.

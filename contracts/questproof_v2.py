@@ -61,7 +61,7 @@ class QuestProofV2(gl.Contract):
         self.last_report = caller + " | " + result + " | " + raw_url
 
     @gl.public.view
-    def get_quest() -> str:
+    def get_quest(self) -> str:
         return (
             "Title: " + self.quest_title +
             " | Required phrase: " + self.required_phrase +

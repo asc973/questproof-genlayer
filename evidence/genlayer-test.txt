@@ -1,0 +1,3 @@
+QuestProof V2 evidence retrieval test.
+This public document explains GenLayer and the role of verified evidence in community quests.
+It is a test fixture only, not proof of a user's authorship or X post.

@@ -54,6 +54,12 @@ The user executed the AI review contract in GenLayer Studio and observed:
 
 Tested scenario: a positive example. Negative and ambiguous cases still need testing.
 
+## Wallet lookup fix (2026-10-20, untested)
+
+A Studio test reported `get_my_status = PENDING_ORGANIZER_REVIEW` while `get_status_for(participant) = NOT_SUBMITTED` for what appeared to be the same address. The likely cause is inconsistent string representation of `Address` versus `gl.message.sender_address`. The original V3 is preserved.
+
+[\`contracts/questproof_v3_fixed.py\`](contracts/questproof_v3_fixed.py) is a **new, untested** version that stores wallet keys in lowercase and accepts `participant_key: str` for cross-wallet functions (`get_status_for`, `attest_participant`, `mark_reward_fulfilled`). All strings must be a full 42-character 0x address. The new contract **must be deployed as a new instance**; old state is not migrated. Verify the write transaction result SUCCESS, not just FINALIZED. Do not attest to real identity without separate identity verification, and never mark a reward fulfilled without a real transfer.
+
 ## QuestProof V3 — organizer attestations and eligibility bookkeeping (unverified)
 
 New candidate: [`contracts/questproof_v3.py`](contracts/questproof_v3.py). Separate [Studio test plan](docs/v3-test-plan.md).

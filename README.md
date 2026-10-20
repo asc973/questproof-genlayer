@@ -1,5 +1,7 @@
 # QuestProof — Evidence before rewards
 
+**Status:** Original Projects application rejected; V2 remediation is in progress and has not been deployed or accepted.
+
 An experimental GenLayer Intelligent Contract proof of concept for reviewing community quest submissions.
 
 **Website:** https://asc973.github.io/questproof-genlayer/
@@ -51,6 +53,39 @@ The user executed the AI review contract in GenLayer Studio and observed:
 - Frontend remains a **separate local rule-based demo**, not a connected blockchain app.
 
 Tested scenario: a positive example. Negative and ambiguous cases still need testing.
+
+## QuestProof V2 — remediation candidate (NOT DEPLOYED)
+
+The original Projects submission was rejected because it classified user-supplied text without independently retrieving evidence, lacked an organizer-owned quest, and did not link results to eligibility.
+
+The new `contracts/questproof_v2.py` **attempts to address these points**:
+
+1. `configure_quest` and `close_quest`: only the deploying organizer wallet can configure/close the quest.
+2. `submit_public_evidence`: GenLayer validators retrieve a **public GitHub Raw** URL instead of trusting pasted text. Only `raw.githubusercontent.com` is accepted.
+3. The calling wallet is the submitting identity. Duplicate submissions from the same wallet are rejected.
+4. The contract saves an eligibility **candidate** status and organizer-defined reward units. **It does not transfer tokens, establish authorship of the remote file, verify X posts, or prove someone controls the GitHub repository.**
+
+### Studio testing checklist
+
+- Create a fresh Studio file named `questproof_v2.py` and paste the entire source with the version header on the first line.
+- Deploy a **new instance**, rather than upgrading the original V1 storage layout.
+- As the deployer, run `configure_quest("Documentation Quest", "GenLayer", 100)`.
+- Call `get_quest` to verify organizer, rule, and reward units.
+- Upload a small public text file to a GitHub repository, copy its **Raw** URL and call `submit_public_evidence(raw_url)`.
+- Call `get_my_status` and `get_last_report` and check the actual transaction result is SUCCESS (not merely FINALIZED).
+- Attempt a second submission from the same wallet; expect rejection.
+- With a second wallet, try calling `configure_quest`; expect rejection.
+- Repeat with a file missing the required phrase; expect `REJECTED_MISSING_PHRASE`.
+- Close the quest and try submitting; expect rejection.
+
+### Outstanding blockers before resubmission
+
+- **Studio execution unverified**: even schema loading, deployment and external fetch may need corrections based on Studio errors.
+- GitHub Raw URLs provide independently fetched content, **not verified authorship**. Attestation, GitHub OAuth ownership checks, or organizer-signed evidence must be added to make identity claims.
+- No automated reward transfers: `reward_units` records accounting intent only.
+- Frontend is the pre-existing, non-integrated demonstration. A connected organizer/user workflow is not yet built.
+
+Do **not** claim the rejection is fully resolved or resubmit the unchanged Projects application.
 
 ## Roadmap
 

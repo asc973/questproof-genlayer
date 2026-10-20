@@ -54,6 +54,18 @@ The user executed the AI review contract in GenLayer Studio and observed:
 
 Tested scenario: a positive example. Negative and ambiguous cases still need testing.
 
+## Verified V3 Fixed Studio test — October 20, 2026
+
+The contributor manually executed the following in GenLayer Studio and observed these results:
+
+- Organizer configured a test quest with title `Documentation Quest`, required phrase `GenLayer`, and `100` off-chain reward units.
+- Participant wallet submitted public GitHub Raw evidence: `https://raw.githubusercontent.com/asc973/questproof-genlayer/main/evidence/genlayer-test.txt`.
+- The participant obtained `PENDING_ORGANIZER_REVIEW`.
+- The organizer's `attest_participant` transaction reached `FINALIZED` with `Result: SUCCESS`.
+- Subsequent `get_status_for` returned `ELIGIBLE_FOR_OFFCHAIN_REWARD | Source: https://raw.githubusercontent.com/asc973/questproof-genlayer/main/evidence/genlayer-test.txt | Marked fulfilled: NO`.
+
+**Important:** This demonstrates organizer-attested eligibility bookkeeping for a test fixture, not independent GitHub author ownership verification, proof of identity, a payment, or a live integration with the website. `mark_reward_fulfilled` was not executed. The rejected original Projects submission is not automatically accepted by these changes. Tests should be independently reproducible.
+
 ## Wallet lookup fix (2026-10-20, untested)
 
 A Studio test reported `get_my_status = PENDING_ORGANIZER_REVIEW` while `get_status_for(participant) = NOT_SUBMITTED` for what appeared to be the same address. The likely cause is inconsistent string representation of `Address` versus `gl.message.sender_address`. The original V3 is preserved.

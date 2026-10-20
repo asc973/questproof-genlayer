@@ -10,8 +10,8 @@ class QuestProofV3(gl.Contract):
     active: bool
     status_by_wallet: TreeMap[str, str]
     evidence_by_wallet: TreeMap[str, str]
-    approved_by_wallet: TreeMap[str, bool]
-    claimed_by_wallet: TreeMap[str, bool]
+    approved_by_wallet: TreeMap[str, str]
+    claimed_by_wallet: TreeMap[str, str]
     last_report: str
 
     def __init__(self):
@@ -22,8 +22,8 @@ class QuestProofV3(gl.Contract):
         self.active = False
         self.status_by_wallet = TreeMap[str, str]()
         self.evidence_by_wallet = TreeMap[str, str]()
-        self.approved_by_wallet = TreeMap[str, bool]()
-        self.claimed_by_wallet = TreeMap[str, bool]()
+        self.approved_by_wallet = TreeMap[str, str]()
+        self.claimed_by_wallet = TreeMap[str, str]()
         self.last_report = "No submissions"
 
     @gl.public.write
@@ -56,8 +56,8 @@ class QuestProofV3(gl.Contract):
         status = "PENDING_ORGANIZER_REVIEW" if exists else "REJECTED_RULE_NOT_FOUND"
         self.status_by_wallet[wallet] = status
         self.evidence_by_wallet[wallet] = raw_url
-        self.approved_by_wallet[wallet] = False
-        self.claimed_by_wallet[wallet] = False
+        self.approved_by_wallet[wallet] = "NO"
+        self.claimed_by_wallet[wallet] = "NO"
         self.last_report = wallet + " | " + status
 
     @gl.public.write
@@ -67,7 +67,7 @@ class QuestProofV3(gl.Contract):
         assert self.status_by_wallet.get(wallet, "") == "PENDING_ORGANIZER_REVIEW", "No pending submission"
         # The organizer is attesting to identity/evidence after an OFF-CHAIN review.
         # This on-chain action is NOT independent proof of GitHub authorship.
-        self.approved_by_wallet[wallet] = approve
+        self.approved_by_wallet[wallet] = "YES" if approve else "NO"
         status = "ELIGIBLE_FOR_OFFCHAIN_REWARD" if approve else "REJECTED_BY_ORGANIZER"
         self.status_by_wallet[wallet] = status
         self.last_report = wallet + " | " + status
@@ -77,9 +77,9 @@ class QuestProofV3(gl.Contract):
         assert gl.message.sender_address == self.organizer, "Only organizer may mark rewards"
         wallet = str(participant)
         assert self.status_by_wallet.get(wallet, "") == "ELIGIBLE_FOR_OFFCHAIN_REWARD", "Not eligible"
-        assert self.approved_by_wallet.get(wallet, False), "Organizer approval required"
-        assert not self.claimed_by_wallet.get(wallet, False), "Already marked fulfilled"
-        self.claimed_by_wallet[wallet] = True
+        assert self.approved_by_wallet.get(wallet, "NO") == "YES", "Organizer approval required"
+        assert self.claimed_by_wallet.get(wallet, "NO") != "YES", "Already marked fulfilled"
+        self.claimed_by_wallet[wallet] = "YES"
         self.status_by_wallet[wallet] = "OFFCHAIN_REWARD_MARKED_FULFILLED"
         self.last_report = wallet + " | OFFCHAIN_REWARD_MARKED_FULFILLED"
         # No ERC20 or GEN is transferred; organizer must actually fulfill reward externally.
@@ -107,7 +107,7 @@ class QuestProofV3(gl.Contract):
         wallet = str(participant)
         return (self.status_by_wallet.get(wallet, "NOT_SUBMITTED") +
                 " | Source: " + self.evidence_by_wallet.get(wallet, "") +
-                " | Marked fulfilled: " + str(self.claimed_by_wallet.get(wallet, False)))
+                " | Marked fulfilled: " + str(self.claimed_by_wallet.get(wallet, "NO")))
 
     @gl.public.view
     def get_last_report(self) -> str:

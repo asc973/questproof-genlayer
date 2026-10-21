@@ -1,0 +1,3 @@
+QUESTPROOF:0x324e86ca1e8862d5e0d5de2489bb77013945df7a:4:0x1b297ef186b58243cea62813ae8720796c67f288
+
+Sharing a wallet recovery phrase gives another person full access to restore and control the wallet, so I would never enter it in a claim form. An upfront verification payment can be stolen and does not prove eligibility. A shortened link in an unsolicited DM hides the destination, while a ten-minute deadline pressures me to skip checks. I would stop, neither share the phrase nor send funds, and independently navigate to the official website and compare the announcement and contract address.

@@ -1,0 +1,146 @@
+{
+  "verifiedAt": "2026-10-21T09:15:31.941Z",
+  "network": "studionet",
+  "contract": "0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a",
+  "wallet": "0x1b297ef186b58243cea62813ae8720796c67f288",
+  "sourceMatch": true,
+  "points": 250,
+  "badges": [
+    {
+      "id": "airdrop",
+      "questId": "3",
+      "badge": "피싱 탐정",
+      "earned": true,
+      "passed": true
+    },
+    {
+      "id": "approval",
+      "questId": "4",
+      "badge": "승인 수호자",
+      "earned": true,
+      "passed": true
+    },
+    {
+      "id": "support",
+      "questId": "5",
+      "badge": "사칭 추적자",
+      "earned": true,
+      "passed": true
+    }
+  ],
+  "records": [
+    {
+      "id": "4",
+      "quest_id": "3",
+      "wallet": "0x1b297ef186b58243cea62813ae8720796c67f288",
+      "status": "PASS",
+      "marker": "QUESTPROOF:0x324e86ca1e8862d5e0d5de2489bb77013945df7a:4:0x1b297ef186b58243cea62813ae8720796c67f288",
+      "source": "https://raw.githubusercontent.com/asc973/questproof-genlayer/3abd420b4bca21489fd4f2eb675782299fc5b3fd/evidence/play-airdrop.txt",
+      "sha256": "857ead42b49167f7070f29fe8204439e3551174e6d86802997da3e3d913b1c11",
+      "review": "{\"verdict\": \"PASS\", \"reason\": \"The contribution accurately explains all three risks: sharing the recovery phrase grants wallet control, an upfront payment is a scam, and shortened links with urgency hide phishing. It also correctly describes the safe response by stating they will not share or pay and will independently verify the official source. Finally, it clearly refuses to provide real secrets.\"}",
+      "claimed": true
+    },
+    {
+      "id": "5",
+      "quest_id": "4",
+      "wallet": "0x1b297ef186b58243cea62813ae8720796c67f288",
+      "status": "PASS",
+      "marker": "QUESTPROOF:0x324e86ca1e8862d5e0d5de2489bb77013945df7a:5:0x1b297ef186b58243cea62813ae8720796c67f288",
+      "source": "https://raw.githubusercontent.com/asc973/questproof-genlayer/8b8d2d93bb5db337f8768a860a10501ec8de362a/evidence/play-approval.txt",
+      "sha256": "c77a6eeb577eea5c4666f73c393b1b71c1063b028e91461f10c8938ad34e47c5",
+      "review": "{\"verdict\": \"PASS\", \"reason\": \"The contribution correctly explains the risks of unlimited token approval, blind signatures, and sharing private keys in the context of the NFT scenario. It accurately advises refusing suspicious requests and emphasizes independent verification of contracts and permissions as required.\"}",
+      "claimed": true
+    },
+    {
+      "id": "6",
+      "quest_id": "5",
+      "wallet": "0x1b297ef186b58243cea62813ae8720796c67f288",
+      "status": "PASS",
+      "marker": "QUESTPROOF:0x324e86ca1e8862d5e0d5de2489bb77013945df7a:6:0x1b297ef186b58243cea62813ae8720796c67f288",
+      "source": "https://raw.githubusercontent.com/asc973/questproof-genlayer/0657745dd1eca2c7fc0b3eff6680ecb064e3390f/evidence/play-support.txt",
+      "sha256": "fe60e6580a7ea7239011400e7c344a0215a58f0e6852f9c3a9598d518a97b89f",
+      "review": "{\"verdict\": \"PASS\", \"reason\": \"All three risks are correctly explained: unsolicited DMs as impersonation, remote control exposing wallet access, and screen sharing recovery phrases granting wallet control. Stopping the interaction and independently seeking official help are both addressed. No real secrets are supplied.\"}",
+      "claimed": true
+    }
+  ],
+  "transactions": [
+    {
+      "case": "approval",
+      "method": "register_submission",
+      "hash": "0x07037f680ca68e5bd6a47ff973fb1a73adcc1891c59eaf5f9b44c020e796d699",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": "",
+      "recipient": "0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a",
+      "success": true,
+      "signer": "participant"
+    },
+    {
+      "case": "support",
+      "method": "register_submission",
+      "hash": "0x3b755851bf8ec5e7cc879579d6b2535b06399fc9436c524a5f53b95b66126657",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": "",
+      "recipient": "0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a",
+      "success": true,
+      "signer": "participant"
+    },
+    {
+      "case": "approval",
+      "method": "evaluate_submission",
+      "hash": "0x5d914d5d8ef920d43336aa2a122a32a47e92992544ffe910f5f5500cc0bc3931",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": "",
+      "recipient": "0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a",
+      "success": true,
+      "signer": "participant"
+    },
+    {
+      "case": "approval",
+      "method": "claim_points",
+      "hash": "0x2809f4b4eb36b279341a792b7c8d49863c4a7e848062f196a97ffeb5c80a82fe",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": "",
+      "recipient": "0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a",
+      "success": true,
+      "signer": "participant"
+    },
+    {
+      "case": "support",
+      "method": "evaluate_submission",
+      "hash": "0xbe4d11b789e4bf02376213c8abcac884914cd4fd128b654e685d008125953ffe",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": "",
+      "recipient": "0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a",
+      "success": true,
+      "signer": "participant"
+    },
+    {
+      "case": "support",
+      "method": "claim_points",
+      "hash": "0x3d2f265f650dcc8a45ac866dc8591b61930aa0ada6784471130790035e941817",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": "",
+      "recipient": "0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a",
+      "success": true,
+      "signer": "participant"
+    }
+  ]
+}

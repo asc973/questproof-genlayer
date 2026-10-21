@@ -6,7 +6,7 @@ Status: prepared for review; not submitted by the agent. See V4_VERIFICATION.md 
 QuestProof
 
 ## Description (under 1000 characters)
-QuestProof V4 is a GenLayer Studio application for reviewing public community contributions. Its frontend signs real transactions, reads finalized state, tracks receipts and exports evidence. Participants register a wallet-bound challenge, publish it with their contribution at a commit-pinned GitHub Raw URL, and request AI review. The contract fetches the source, checks its binding, stores its digest and uses validator consensus to assess all quest requirements. PASS, FAIL or REVIEW and a specific explanation are recorded without a manual PASS override. A passing wallet can claim non-transferable app points once. Live tests cover positive reviews, prompt-injection rejection, permissions and duplicate claims. Deployed source matches the repository. The challenge binds a file to a signer; it does not verify GitHub identity or universal originality. Points are not tokens or money.
+QuestProof is a GenLayer Studionet learning app with three Trap Hunt challenges: phishing airdrops, risky NFT approvals and fake support. Anyone can practice without a wallet; local quiz feedback is clearly separated from AI consensus. For verified participation, a signer registers, publishes a wallet-bound explanation at a commit-pinned GitHub Raw URL, and requests review. The contract fetches evidence, checks the challenge, stores its SHA-256 digest, and uses independent validator assessments to record PASS, FAIL or REVIEW with reasons. A PASS can claim 50 non-transferable app points once per challenge. The passport derives badges only from finalized PASS and claim records. All three challenges were tested through real registration, AI review and claims; deployed source matches GitHub. Badges are app labels, not NFTs. No GitHub identity, human uniqueness, financial reward or guaranteed AI accuracy is claimed.
 
 ## Evidence to submit
 
@@ -15,6 +15,9 @@ QuestProof V4 is a GenLayer Studio application for reviewing public community co
 3. Verification report and linked transactions: https://github.com/asc973/questproof-genlayer/blob/main/docs/V4_VERIFICATION.md
 4. Active source: https://github.com/asc973/questproof-genlayer/blob/main/contracts/questproof_v4.py
 5. Machine-readable live results: https://github.com/asc973/questproof-genlayer/blob/main/docs/v4-live-results.json
+
+6. Three-challenge verification and participation: https://github.com/asc973/questproof-genlayer/blob/main/docs/PLAY.md
+7. Finalized three-badge results: https://github.com/asc973/questproof-genlayer/blob/main/docs/all-challenges-results.json
 
 ## Changes responding to rejection
 
@@ -28,3 +31,10 @@ QuestProof V4 is a GenLayer Studio application for reviewing public community co
 ## Reviewer walkthrough
 
 Open the app, start a temporary Studio session or connect a wallet, select quest 1 and register. Load the new submission, download the challenge-prefixed evidence file, publish it in a public repository, and paste its commit-pinned Raw URL. Run AI review, inspect the stored verdict/reason and receipt, and claim points after PASS. A new temporary browser session signs real sandbox transactions; it is not a simulation. Its key disappears on refresh. Existing public records can also be inspected without a signer.
+
+
+## Trap Hunt reviewer shortcut
+
+Play any of the three fictional scenarios without a signer. To inspect existing finalized achievement, enter wallet `0x1b297ef186b58243cea62813ae8720796c67f288` in Wallet history and click **온체인 여권 불러오기** in the Play section. It should show 3/3 badges and 250 app points (150 from three challenges plus 100 from an earlier quest). To participate, connect a signer, write 80+ characters in your own explanation, click **온체인 도전 준비**, then follow registration, public pinned evidence, AI review and point claim in the workspace. Local quiz choices alone never earn a badge.
+
+Submission status remains: prepared, not sent to the GenLayer Projects portal by the agent.

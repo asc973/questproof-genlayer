@@ -106,3 +106,7 @@ Earlier successful checks are not substituted for the final release results. The
 ## Organizer browser deployment and quest creation
 
 The published browser app also deployed a separate organizer workspace, verified exact source matching, then created quest #1 with 25 points. Both transactions reached FINALIZED with successful execution. This extra smoke test does not replace the primary demo deployment. See [machine-readable organizer results](v4-organizer-browser-results.json).
+
+## Trap Hunt expansion
+
+The same source-matched deployment now hosts three additional security learning quests. All three were tested through finalized registration, actual AI PASS and claims. See [complete participation and verification](PLAY.md) and [all-challenge final results](all-challenges-results.json). These extend, rather than replace, the original core verification.

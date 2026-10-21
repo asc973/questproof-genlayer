@@ -1,0 +1,14 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {successfulReceipt,normalizeReceipt} from '../src/receipts.js';
+const modern={statusName:'FINALIZED',resultName:'MAJORITY_AGREE',txExecutionResultName:'FINISHED_WITH_RETURN'};
+const legacy={status:7,result:6,consensus_data:{leader_receipt:[{execution_result:'SUCCESS',result:{status:'return'},genvm_result:{stderr:''}}]}};
+test('modern final success',()=>assert.equal(successfulReceipt(modern),true));
+test('legacy final success requires returned payload and consensus',()=>assert.equal(successfulReceipt(legacy),true));
+test('finalized rollback is not success',()=>assert.equal(successfulReceipt({...legacy,consensus_data:{leader_receipt:[{execution_result:'ERROR',result:{status:'error'}}]}}),false));
+test('finalized no majority is not success',()=>assert.equal(successfulReceipt({...legacy,result:5}),false));
+test('accepted is not durable completion',()=>assert.equal(successfulReceipt({...modern,statusName:'ACCEPTED'}),false));
+test('missing execution proof is not success',()=>assert.equal(successfulReceipt({status:7,result:6}),false));
+test('last leader outcome wins over stale successful round',()=>assert.equal(successfulReceipt({...legacy,consensus_data:{leader_receipt:[legacy.consensus_data.leader_receipt[0],{execution_result:'ERROR',result:{status:'error'}}]}}),false));
+test('status mapping',()=>assert.equal(normalizeReceipt({status:6}).status,'UNDETERMINED'));
+test('idle validator after quorum does not overwrite the actual leader',()=>assert.equal(successfulReceipt({...legacy,consensus_data:{leader_receipt:[{...legacy.consensus_data.leader_receipt[0],mode:'leader'},{mode:'validator',execution_result:'ERROR',result:{status:'contract_error'}}]}}),true));

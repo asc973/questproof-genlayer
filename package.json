@@ -1,0 +1,32 @@
+{
+  "name": "questproof-genlayer",
+  "version": "4.0.0",
+  "description": "Live GenLayer Studio quest evidence review application",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "esbuild src/app.js --bundle --format=esm --target=es2022 --outfile=assets/app.js --minify",
+    "test": "node --test tests/*.test.js && python -m unittest discover -s tests -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asc973/questproof-genlayer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/asc973/questproof-genlayer/issues"
+  },
+  "homepage": "https://github.com/asc973/questproof-genlayer#readme",
+  "dependencies": {
+    "genlayer-js": "1.1.8",
+    "viem": "2.38.5"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.11"
+  }
+}

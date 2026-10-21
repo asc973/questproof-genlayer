@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import {state,clients,read,write,save} from './studio.mjs';
+const positive='https://raw.githubusercontent.com/asc973/questproof-genlayer/ece25176cc2be7584b1b55e4e8195ce405c55a92/evidence/v4-positive.txt';
+const negative='https://raw.githubusercontent.com/asc973/questproof-genlayer/1d335facdf5b79be8dd16ad0f582f55c02226dbb/evidence/v4-injection-negative.txt';
+state.checks ||= {};
+async function check(name,fn){if(state.checks[name])return;await fn();state.checks[name]=true;await save();console.log('CHECK PASS:',name);}
+await check('unauthorized quest creation',()=>write('participant','create_quest',['Unauthorized quest','Explain meaningful decentralization in enough detail to satisfy this rule.',100],false));
+await check('parallel duplicate registration',()=>write('participant','register_submission',['1'],false));
+await check('claim before PASS',()=>write('participant','claim_points',[state.positiveId],false));
+await check('other wallet cannot attach evidence',()=>write('other','evaluate_submission',[state.positiveId,positive],false));
+await check('mutable branch URL rejected',()=>write('participant','evaluate_submission',[state.positiveId,positive.replace('ece25176cc2be7584b1b55e4e8195ce405c55a92','main')],false));
+await check('positive AI review',async()=>{const r=JSON.parse(await read('get_submission',[state.positiveId]));if(r.status==='AWAITING_EVIDENCE')await write('participant','evaluate_submission',[state.positiveId,positive]);const after=JSON.parse(await read('get_submission',[state.positiveId]));assert.equal(after.status,'PASS');assert.ok(after.sha256.length===64);assert.equal(after.source,positive);assert.ok(JSON.parse(after.review).reason.length>=30);});
+await check('adversarial injection rejected by real AI',async()=>{const r=JSON.parse(await read('get_submission',[state.negativeId]));if(r.status==='AWAITING_EVIDENCE')await write('other','evaluate_submission',[state.negativeId,negative]);assert.equal(JSON.parse(await read('get_submission',[state.negativeId])).status,'FAIL');});
+await check('other wallet cannot claim',()=>write('other','claim_points',[state.positiveId],false));
+await check('passing wallet earns exactly 100 points',async()=>{const r=JSON.parse(await read('get_submission',[state.positiveId]));if(!r.claimed)await write('participant','claim_points',[state.positiveId]);assert.equal(Number(await read('get_points',[clients.participant.account.address])),100);});
+await check('duplicate claim rolls back without extra points',async()=>{await write('participant','claim_points',[state.positiveId],false);assert.equal(Number(await read('get_points',[clients.participant.account.address])),100);});
+await check('failed review cannot earn points',()=>write('other','claim_points',[state.negativeId],false));
+await check('passing wallet cannot repeat quest',()=>write('participant','register_submission',['1'],false));
+await check('review cannot be repeated',()=>write('participant','evaluate_submission',[state.positiveId,positive],false));
+console.log(JSON.stringify({checks:state.checks,info:JSON.parse(await read('get_info')),positive:JSON.parse(await read('get_submission',[state.positiveId])),negative:JSON.parse(await read('get_submission',[state.negativeId]))}));

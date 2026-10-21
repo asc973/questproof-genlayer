@@ -1,0 +1,30 @@
+{
+  "verifiedAt": "2026-10-21T04:10:57.119Z",
+  "address": "0xfb8c03e041de537C54d2ddE0bF7A0535478Bc13B",
+  "sourceMatch": true,
+  "transactions": [
+    {
+      "hash": "0x073541fb7cc5553c32e10115f05b1a1b857bcb1e1140cbc0c01fb4fccc14fa8c",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": ""
+    },
+    {
+      "hash": "0xb1e7e4934574a60e853d3b7c4cd8c329ac9b43f53581c23476ecdaf2c58127c4",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": ""
+    }
+  ],
+  "quest": {
+    "id": "1",
+    "title": "Browser Organizer Smoke Test",
+    "rules": "Explain two practical ways to protect a wallet recovery phrase and why sharing that phrase grants control over the account. Never include any actual recovery phrase.",
+    "points": 25,
+    "active": true
+  }
+}

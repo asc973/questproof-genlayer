@@ -98,3 +98,11 @@ Browser signer: `0xf7f367aba6db85baf2ee7778950434feb0715db8`. Submission #3: PAS
 - `0x2E0aF0E7312f47f4492542302dC9b5B16BcE7487`: Non-comparative template judged a review instead of original evidence and stored incorrect PASS in adversarial test. Not a successful release.
 
 Earlier successful checks are not substituted for the final release results. The active contract is the one in deployment.json above.
+
+## Hosted browser screenshot
+
+![Real PASS result and completed point claim](screenshots/v4-e2e.jpg)
+
+## Organizer browser deployment and quest creation
+
+The published browser app also deployed a separate organizer workspace, verified exact source matching, then created quest #1 with 25 points. Both transactions reached FINALIZED with successful execution. This extra smoke test does not replace the primary demo deployment. See [machine-readable organizer results](v4-organizer-browser-results.json).

@@ -1,3 +1,4 @@
+import {mountPlay} from './play.js';
 import {normalizeReceipt} from './receipts.js';
 import {chain,explorer,read,connectWallet,createSession,send,waitForFinalized,publicClient} from './network.js';
 const $=id=>document.getElementById(id);
@@ -102,3 +103,5 @@ $('resume').onclick=()=>run(async()=>{for(const t of history.filter(t=>(t.contra
 $('export').onclick=()=>run(async()=>{const data={contract,network:'studionet',info,transactions:history.filter(t=>t.contract.toLowerCase()===scope()),submission:$('submissionId').value?await read(contract,'get_submission',[$('submissionId').value]):null};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([stringify(data)],{type:'application/json'}));a.download='questproof-evidence.json';a.click();URL.revokeObjectURL(a.href);});
 showSession();renderHistory();
 run(async()=>{const d=await fetch('./deployment.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Deployment config unavailable');return r.json();});if(!contract&&d.verified)contract=d.contractAddress;$('contract').value=contract;if(contract){await refresh();message('Connected to Studionet. Displaying finalized contract state.');}else message('V4 code prepared; verified deployment has not been configured. No simulated results are shown.');});
+
+mountPlay({read,getContract:()=>contract,getWallet:activeAddress,notify:message,prepare:async(id,answer)=>{if(!session)throw Error("먼저 지갑 연결 또는 임시 Studio 세션을 시작하세요.");$("questOffset").value="0";await refresh();$("questId").value=id;$("contribution").value=answer;document.getElementById("workspace").scrollIntoView();}});

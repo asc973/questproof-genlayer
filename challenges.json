@@ -1,0 +1,20 @@
+{
+  "contract": "0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a",
+  "cases": [
+    {
+      "id": "airdrop",
+      "questId": "3",
+      "badge": "피싱 탐정"
+    },
+    {
+      "id": "approval",
+      "questId": "4",
+      "badge": "승인 수호자"
+    },
+    {
+      "id": "support",
+      "questId": "5",
+      "badge": "사칭 추적자"
+    }
+  ]
+}

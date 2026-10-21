@@ -1,0 +1,3 @@
+QUESTPROOF:0x324e86ca1e8862d5e0d5de2489bb77013945df7a:6:0x1b297ef186b58243cea62813ae8720796c67f288
+
+A support agent who contacts me first in a DM may be an impersonator, so the message alone proves nothing. Remote control software could let that person operate my computer or access my wallet. Screen sharing a recovery phrase exposes the words needed to restore and control the wallet, so I must never show them. I would stop the conversation, refuse remote access and secret sharing, and independently open the official help page from the real app to contact support. I would not use the links sent by the stranger.

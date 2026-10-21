@@ -6,7 +6,7 @@ QuestProof is a GenLayer Studio application for reviewing public educational con
 
 **Website:** https://asc973.github.io/questproof-genlayer/
 
-**V4 contract:** https://explorer-studio.genlayer.com/address/0x7637Aa317451975eDa14CF9E0Da9C6c5Eb5e7514
+**V4 contract:** https://explorer-studio.genlayer.com/address/0x6112dDFBC7114504098bF4Bd680f3920a3E290Fd
 
 ## Implemented flow
 

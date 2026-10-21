@@ -4,16 +4,16 @@
 
 V4 is deployed on **Studionet (61999)**. Deployment finalized with successful execution and majority agreement. Deployed code was downloaded through `getContractCode` and matched byte-for-byte with `contracts/questproof_v4.py`.
 
-- Address: `0x7637Aa317451975eDa14CF9E0Da9C6c5Eb5e7514`
-- Deployment transaction: `0x2618861c6982bb69ee31d0fab15cd4d5ebd630ea526d0ba65ac8abe9b75d5f96`
-- Source SHA-256: `f4e5952e1a758c7ca2d955fd0cdbf67d8c1b174a48ca19171376d2c6516d5fe0`
-- Explorer: https://explorer-studio.genlayer.com/address/0x7637Aa317451975eDa14CF9E0Da9C6c5Eb5e7514
+- Address: `0x6112dDFBC7114504098bF4Bd680f3920a3E290Fd`
+- Deployment transaction: `0x782b6db0c064ec9ea064a060add1acbea7f2d6febfd46858aabb8db52d197979`
+- Source SHA-256: `014333468479fd082fb1209b8b6eef4c7a92848ff29df7e126993aaacf070d50`
+- Explorer: https://explorer-studio.genlayer.com/address/0x6112dDFBC7114504098bF4Bd680f3920a3E290Fd
 
 **Verification is in progress. Do not interpret this deployment as mission acceptance or all user flows passing.**
 
 ## Automated local checks
 
-`npm test`: 19 Python contract invariant tests using a mocked GenLayer host and 8 JavaScript receipt classification tests passed. The Python tests execute the contract code but **do not verify GenVM storage, web access, real LLM calls or validator consensus**. Those require the separate live tests.
+`npm test`: 19 Python contract invariant tests using a mocked GenLayer host and 9 JavaScript receipt classification tests passed. The Python tests execute the contract code but **do not verify GenVM storage, web access, real LLM calls or validator consensus**. Those require the separate live tests.
 
 `npm run build`: bundles the pinned GenLayerJS SDK locally for the browser; no runtime CDN import or placeholder verdict is used.
 

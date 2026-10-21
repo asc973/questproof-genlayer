@@ -1,0 +1,58 @@
+{
+  "verifiedAt": "2026-10-21T04:01:37.561Z",
+  "url": "https://asc973.github.io/questproof-genlayer/",
+  "network": "studionet",
+  "contract": "0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a",
+  "signerType": "Temporary in-memory browser account",
+  "personalWalletExtensionTested": false,
+  "transactions": [
+    {
+      "hash": "0x5e6dfd77778811b4840911968806fedf9be7d3c18d67cda21f61f40d50fdc250",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": "",
+      "signer": "0xF7f367aba6Db85BAF2ee7778950434fEb0715DB8",
+      "recipient": "0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a",
+      "mode": "NORMAL",
+      "leaderOnly": false
+    },
+    {
+      "hash": "0x0ca2fb963640b9f30f7a8f86d517db85d478a06fe6f8fefd3a0746d9576df844",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": "",
+      "signer": "0xF7f367aba6Db85BAF2ee7778950434fEb0715DB8",
+      "recipient": "0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a",
+      "mode": "NORMAL",
+      "leaderOnly": false
+    },
+    {
+      "hash": "0x23f0240a97834b761c69c6812f57ea0c84ae9f1b07cc3844737311227e59268b",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": "",
+      "signer": "0xF7f367aba6Db85BAF2ee7778950434fEb0715DB8",
+      "recipient": "0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a",
+      "mode": "NORMAL",
+      "leaderOnly": false
+    }
+  ],
+  "record": {
+    "id": "3",
+    "quest_id": "1",
+    "wallet": "0xf7f367aba6db85baf2ee7778950434feb0715db8",
+    "status": "PASS",
+    "marker": "QUESTPROOF:0x324e86ca1e8862d5e0d5de2489bb77013945df7a:3:0xf7f367aba6db85baf2ee7778950434feb0715db8",
+    "source": "https://raw.githubusercontent.com/asc973/questproof-genlayer/a5540edb56295ca8db88b6d4770a7806baf7bc95/evidence/v4-independent-browser-e2e.txt",
+    "sha256": "9eaec8de7d709cce2d4a829054ca99bbea750b24f52b142cee9d4ceddd21126e",
+    "review": "{\"verdict\": \"PASS\", \"reason\": \"The contribution accurately defines staking and delegation within the GenLayer context and explains how spreading stake across independent operators prevents centralizing influence. It correctly identifies the risk of penalties or reduced rewards due to validator misconduct. The language remains educational and avoids financial solicitation.\"}",
+    "claimed": true
+  },
+  "points": 100
+}

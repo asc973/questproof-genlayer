@@ -11,17 +11,23 @@ class Contract:
             if typ is TreeMap: setattr(obj,name,TreeMap())
         return obj
 identity=lambda fn:fn
+class Return:
+    def __init__(self,value): self.calldata=value
+def consensus(leader,validator):
+    value=leader()
+    if not validator(Return(value)):raise UserError('Independent validator disagreed')
+    return value
 ctx=types.SimpleNamespace(sender_address='0x'+'a'*40,contract_address='0x'+'c'*40)
-host=types.SimpleNamespace(body=b'',output='',calls=0)
-def prompt(text): host.calls+=1;return host.output
-gl=types.SimpleNamespace(Contract=Contract,public=types.SimpleNamespace(view=identity,write=identity),message=ctx,vm=types.SimpleNamespace(UserError=UserError),nondet=types.SimpleNamespace(web=types.SimpleNamespace(get=lambda url:types.SimpleNamespace(body=host.body)),exec_prompt=prompt),eq_principle=types.SimpleNamespace(strict_eq=lambda fn:fn(),prompt_non_comparative=lambda fn,**kw:fn()))
+host=types.SimpleNamespace(body=b'',output='',calls=0,sequence=[])
+def prompt(text, **kwargs): host.calls+=1;return host.sequence.pop(0) if host.sequence else host.output
+gl=types.SimpleNamespace(Contract=Contract,public=types.SimpleNamespace(view=identity,write=identity),message=ctx,vm=types.SimpleNamespace(UserError=UserError,Return=Return,run_nondet_unsafe=consensus),nondet=types.SimpleNamespace(web=types.SimpleNamespace(get=lambda url:types.SimpleNamespace(body=host.body)),exec_prompt=prompt),eq_principle=types.SimpleNamespace(strict_eq=lambda fn:fn(),prompt_non_comparative=lambda fn,**kw:fn()))
 m=types.ModuleType('genlayer');m.gl=gl;m.Address=str;m.u32=int;m.TreeMap=TreeMap;sys.modules['genlayer']=m
 spec=importlib.util.spec_from_file_location('v4','contracts/questproof_v4.py');mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
 URL='https://raw.githubusercontent.com/user/repo/'+'1'*40+'/evidence.txt'
 RULE='Explain staking, delegation, and how multiple independent validators support decentralization.'
 class Tests(unittest.TestCase):
     def setUp(self):
-        ctx.sender_address='0x'+'a'*40;self.c=mod.QuestProofV4();self.q=self.c.create_quest('Staking education',RULE,100);ctx.sender_address='0x'+'b'*40;host.calls=0
+        ctx.sender_address='0x'+'a'*40;self.c=mod.QuestProofV4();self.q=self.c.create_quest('Staking education',RULE,100);ctx.sender_address='0x'+'b'*40;host.calls=0;host.sequence=[]
     def register(self): return self.c.register_submission(self.q)
     def evidence(self,sid,verdict='PASS'):
         r=json.loads(self.c.get_submission(sid));host.body=(r['marker']+'\n'+'Delegation supports independent validators and decentralization. Staking aligns incentives with responsible validation. '*2).encode();host.output=json.dumps({'verdict':verdict,'reason':'The supplied contribution explains the required concepts with substantive detail.'});return self.c.evaluate_submission(sid,URL)
@@ -74,6 +80,17 @@ class Tests(unittest.TestCase):
         sid=self.register();r=json.loads(self.c.get_submission(sid));host.body=(r['marker']+'\n'+'x'*100).encode();host.output='{"verdict":"APPROVE","reason":"bad"}'
         with self.assertRaises(UserError):self.c.evaluate_submission(sid,URL)
         self.assertEqual(json.loads(self.c.get_submission(sid))['status'],'AWAITING_EVIDENCE')
+    def test_structured_json_response(self):
+        sid=self.register();r=json.loads(self.c.get_submission(sid));host.body=(r['marker']+'\n'+'x'*100).encode();host.output={'verdict':'PASS','reason':'The evidence meets the requirements with sufficient substantive detail.'}
+        self.c.evaluate_submission(sid,URL);self.assertEqual(json.loads(self.c.get_submission(sid))['status'],'PASS')
+    def test_fenced_json_response_is_normalized(self):
+        sid=self.register();r=json.loads(self.c.get_submission(sid));host.body=(r['marker']+'\n'+'x'*100).encode();host.output='```json\n'+json.dumps({'verdict':'REVIEW','reason':'The contribution is ambiguous and requires further substantive explanation.'})+'\n```'
+        self.c.evaluate_submission(sid,URL);self.assertEqual(json.loads(self.c.get_submission(sid))['status'],'REVIEW')
+    def test_independent_verdict_disagreement_cannot_commit(self):
+        sid=self.register();r=json.loads(self.c.get_submission(sid));host.body=(r['marker']+'\n'+'x'*100).encode()
+        host.sequence=[{'verdict':'PASS','reason':'The leader believes all contribution requirements are satisfied.'},{'verdict':'FAIL','reason':'The independent validator finds substantive requirements missing.'}]
+        with self.assertRaises(UserError):self.c.evaluate_submission(sid,URL)
+        self.assertEqual(host.calls,2);self.assertEqual(json.loads(self.c.get_submission(sid))['status'],'AWAITING_EVIDENCE');self.assertEqual(self.c.get_points(ctx.sender_address),0)
     def test_repeat_evaluation(self):
         sid=self.register();self.evidence(sid)
         with self.assertRaises(UserError):self.evidence(sid)

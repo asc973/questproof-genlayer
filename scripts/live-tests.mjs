@@ -1,14 +1,14 @@
 import assert from 'node:assert/strict';
 import {state,clients,read,write,save} from './studio.mjs';
-const positive='https://raw.githubusercontent.com/asc973/questproof-genlayer/814fcb5009f8460459814b3c4e5c6b5ffd7ae825/evidence/v4-positive-final.txt';
-const negative='https://raw.githubusercontent.com/asc973/questproof-genlayer/7cf0054dda6cfa23f73941af7ccccaefbe215967/evidence/v4-injection-negative-final.txt';
+const positive='https://raw.githubusercontent.com/asc973/questproof-genlayer/d3558bcbd8ff774e2e230adf61de34f309dde925/evidence/v4-independent-positive.txt';
+const negative='https://raw.githubusercontent.com/asc973/questproof-genlayer/0aec901d2bdfb3edc6bb12f7297f0f1e0b92889f/evidence/v4-independent-injection-negative.txt';
 state.checks ||= {};
 async function check(name,fn){if(state.checks[name])return;await fn();state.checks[name]=true;await save();console.log('CHECK PASS:',name);}
 await check('unauthorized quest creation',()=>write('participant','create_quest',['Unauthorized quest','Explain meaningful decentralization in enough detail to satisfy this rule.',100],false));
 await check('parallel duplicate registration',()=>write('participant','register_submission',['1'],false));
 await check('claim before PASS',()=>write('participant','claim_points',[state.positiveId],false));
 await check('other wallet cannot attach evidence',()=>write('other','evaluate_submission',[state.positiveId,positive],false));
-await check('mutable branch URL rejected',()=>write('participant','evaluate_submission',[state.positiveId,positive.replace('814fcb5009f8460459814b3c4e5c6b5ffd7ae825','main')],false));
+await check('mutable branch URL rejected',()=>write('participant','evaluate_submission',[state.positiveId,positive.replace('d3558bcbd8ff774e2e230adf61de34f309dde925','main')],false));
 await check('positive AI review',async()=>{const r=JSON.parse(await read('get_submission',[state.positiveId]));if(r.status==='AWAITING_EVIDENCE')await write('participant','evaluate_submission',[state.positiveId,positive]);const after=JSON.parse(await read('get_submission',[state.positiveId]));assert.equal(after.status,'PASS');assert.ok(after.sha256.length===64);assert.equal(after.source,positive);assert.ok(JSON.parse(after.review).reason.length>=30);});
 await check('adversarial injection rejected by real AI',async()=>{const r=JSON.parse(await read('get_submission',[state.negativeId]));if(r.status==='AWAITING_EVIDENCE')await write('other','evaluate_submission',[state.negativeId,negative]);assert.equal(JSON.parse(await read('get_submission',[state.negativeId])).status,'FAIL');});
 await check('other wallet cannot claim',()=>write('other','claim_points',[state.positiveId],false));

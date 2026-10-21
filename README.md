@@ -2,11 +2,11 @@
 
 QuestProof is a GenLayer Studio application for reviewing public educational contributions against immutable community quest requirements. V4 replaces the old browser-only simulation and manual organizer attestations with direct contract reads/writes, source-grounded AI consensus and a non-transferable point ledger.
 
-**Status:** V4 deployed; live integration verification in progress. No claim of Projects acceptance. See [verification](docs/V4_VERIFICATION.md) for exactly what has and has not passed. V1–V3 sources remain for historical transparency; they are not the active application.
+**Status:** verified V4 release on Studionet. 31 local tests, 13 live integration checks and the public-browser register → AI review → point claim flow passed. See [verification](docs/V4_VERIFICATION.md) for transaction IDs, exact source matching and untested personal-wallet signing. Projects acceptance is not claimed. V1–V3 sources are historical; deployment.json identifies the active V4 contract.
 
 **Website:** https://asc973.github.io/questproof-genlayer/
 
-**V4 contract:** https://explorer-studio.genlayer.com/address/0x6112dDFBC7114504098bF4Bd680f3920a3E290Fd
+**V4 contract:** https://explorer-studio.genlayer.com/address/0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a
 
 ## Implemented flow
 
@@ -41,3 +41,11 @@ GitHub Pages serves the root `index.html`, compiled `assets/`, and `deployment.j
 - Live deployment and test harness: `scripts/`; generated keys and pending IDs live in ignored `.local/` only.
 
 Deploying with `NODE_USE_ENV_PROXY=1 node scripts/studio.mjs deploy` creates temporary test accounts and submits a real sandbox deployment. It refuses to blindly deploy again when an address is already recorded. Keep `.local/` private and never use personal-wallet keys there.
+
+## Evidence for review
+
+- [Exact source and transaction evidence](docs/V4_VERIFICATION.md)
+- [Machine-readable live test results](docs/v4-live-results.json)
+- [Deployment manifest](deployment.json)
+
+The public demo workspace uses a temporary test organizer. To manage your own quests, connect a signer and choose **Deploy my own organizer workspace**. Its transaction makes that signer the organizer; source matching is checked before activation. A temporary browser signer is lost on refresh, so use an external wallet for ongoing organizer access.

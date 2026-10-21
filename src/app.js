@@ -85,10 +85,12 @@ $('disconnect').onclick=()=>{session=null;showSession();$('organizer').hidden=tr
 $('deployOwn').onclick=()=>run(deployOwn);
 window.ethereum?.on?.('accountsChanged',()=>{session=null;showSession();$('organizer').hidden=true;message('Wallet account changed; reconnect before writing.');});
 window.ethereum?.on?.('chainChanged',()=>{session=null;showSession();message('Wallet network changed; reconnect to Studionet.');});
-$('apply').onclick=()=>run(async()=>{const address=$('contract').value.trim();const test=await read(address,'get_info');if(test.version!=='4.0.0')throw Error('Not a V4 deployment');contract=address;localStorage.setItem('questproof-v4-address',contract);await refresh();});
+$('apply').onclick=()=>run(async()=>{const address=$('contract').value.trim();const test=await read(address,'get_info');if(test.version!=='4.0.0')throw Error('Not a V4 deployment');contract=address;localStorage.setItem('questproof-v4-address',contract);await refresh();message('Connected to the selected V4 contract. Showing finalized state.');});
 $('refresh').onclick=()=>run(refresh);$('lookup').onclick=()=>run(refreshWallet);
 $('register').onclick=()=>run(async()=>{await transact('register_submission',[$('questId').value]);const next=await read(contract,'get_info');const recent=await read(contract,'list_submissions',[session.address,Math.max(0,Number(next.submissions)-25),25]);const mine=recent.find(r=>r.wallet===session.address.toLowerCase()&&r.quest_id===$('questId').value&&r.status==='AWAITING_EVIDENCE');if(mine){$('submissionId').value=mine.id;await readSubmission();}await refreshWallet();message('Registration finalized. Load your submission challenge, publish the evidence, then request review.');});
 $('load').onclick=()=>run(readSubmission);
+$('samplePass').onclick=()=>run(async()=>{$('submissionId').value='1';await readSubmission();});
+$('sampleFail').onclick=()=>run(async()=>{$('submissionId').value='2';await readSubmission();});
 $('copy').onclick=()=>run(async()=>{await navigator.clipboard.writeText($('challenge').value);message('Challenge copied. Put it on the FIRST line of the evidence file.');});
 $('download').onclick=()=>run(async()=>{const r=await readSubmission();const blob=new Blob([r.marker+'\n\n'+$('contribution').value.trim()+'\n'],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='questproof-'+r.id+'.txt';a.click();URL.revokeObjectURL(a.href);});
 $('evaluate').onclick=()=>run(async()=>{await transact('evaluate_submission',[$('submissionId').value.trim(),$('evidenceUrl').value.trim()]);await readSubmission();});

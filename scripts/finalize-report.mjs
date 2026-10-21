@@ -1,0 +1,14 @@
+import {clients,state,read} from './studio.mjs';
+import {normalizeReceipt,successfulReceipt} from '../src/receipts.js';
+import {TransactionStatus} from 'genlayer-js/types';
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+const hashes=[...new Set(state.transactions.map(t=>t.hash))];
+const results=await Promise.all(hashes.map(async hash=>{await clients.organizer.waitForTransactionReceipt({hash,status:TransactionStatus.FINALIZED,interval:3000,retries:100});const tx=await clients.organizer.getTransaction({hash});return {...normalizeReceipt(tx),method:state.transactions.find(t=>t.hash===hash)?.method||'deploy',signer:tx.from_address||tx.sender,executionSuccess:successfulReceipt(tx),mode:tx.execution_mode,leaderOnly:tx.leader_only};}));
+const source=await readFile('contracts/questproof_v4.py','utf8');const remote=await clients.organizer.getContractCode(state.address);
+if(source!==remote)throw Error('Final source mismatch');
+const positive=JSON.parse(await read('get_submission',[state.positiveId]));const negative=JSON.parse(await read('get_submission',[state.negativeId]));
+if(positive.status!=='PASS'||!positive.claimed||negative.status!=='FAIL')throw Error('Unexpected final states');
+const points=Number(await read('get_points',[clients.participant.account.address]));if(points!==100)throw Error('Incorrect point balance');
+const report={network:'studionet',chainId:61999,contract:state.address,sourceSha256:createHash('sha256').update(source).digest('hex'),sourceMatch:true,verifiedAt:new Date().toISOString(),checks:state.checks,transactions:results,positive,negative,participantPoints:points,previousDeployments:state.previousDeployments||[state.previousDeployment]};
+await writeFile('docs/v4-live-results.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({contract:report.contract,sourceMatch:true,checks:Object.keys(report.checks).length,finalized:results.filter(r=>r.status==='FINALIZED').length,total:results.length,points,positive:positive.status,negative:negative.status}));

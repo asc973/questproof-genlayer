@@ -49,3 +49,7 @@ Deploying with `NODE_USE_ENV_PROXY=1 node scripts/studio.mjs deploy` creates tem
 - [Deployment manifest](deployment.json)
 
 The public demo workspace uses a temporary test organizer. To manage your own quests, connect a signer and choose **Deploy my own organizer workspace**. Its transaction makes that signer the organizer; source matching is checked before activation. A temporary browser signer is lost on refresh, so use an external wallet for ongoing organizer access.
+
+## Play: Trap Hunt + Contribution Passport
+
+Three wallet-free fictional security challenges with immediate local explanations, plus wallet-bound GenLayer AI review and finalized PASS/claim badges. Each challenge awards 50 app points once. See [participation and verification](docs/PLAY.md). Practice is not AI consensus; badges are derived app labels, not NFTs.

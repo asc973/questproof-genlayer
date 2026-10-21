@@ -9,3 +9,7 @@ The passport scans every 25-record page of finalized submissions for the request
 Daily starting scenario uses the day of month in Asia/Seoul. All three scenarios remain selectable. Practice progress is stored only on this device. No financial rewards or human uniqueness are claimed.
 
 Local validation: 33 automated tests (11 JavaScript and 22 contract host tests), including all-choices rejection and badge gating. Network and hosted browser verification are recorded separately when completed.
+
+## Verified live challenge
+
+Quest #3 (airdrop) → submission #4 → actual AI PASS → successful finalized claim. The test wallet's balance increased from its previous 100 to 150 points. All three quest creations, registration, evaluation and claim (6 transactions) were individually reread and proved FINALIZED / MAJORITY_AGREE / SUCCESS. Deployed source still matches the published V4 byte for byte. See [machine-readable live evidence](play-live-results.json). This tests one challenge end to end, not all three semantic outcomes or a personal wallet extension.

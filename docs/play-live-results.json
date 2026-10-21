@@ -1,0 +1,100 @@
+{
+  "verifiedAt": "2026-10-21T08:32:25.961Z",
+  "contract": "0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a",
+  "record": {
+    "id": "4",
+    "quest_id": "3",
+    "wallet": "0x1b297ef186b58243cea62813ae8720796c67f288",
+    "status": "PASS",
+    "marker": "QUESTPROOF:0x324e86ca1e8862d5e0d5de2489bb77013945df7a:4:0x1b297ef186b58243cea62813ae8720796c67f288",
+    "source": "https://raw.githubusercontent.com/asc973/questproof-genlayer/3abd420b4bca21489fd4f2eb675782299fc5b3fd/evidence/play-airdrop.txt",
+    "sha256": "857ead42b49167f7070f29fe8204439e3551174e6d86802997da3e3d913b1c11",
+    "review": "{\"verdict\": \"PASS\", \"reason\": \"The contribution accurately explains all three risks: sharing the recovery phrase grants wallet control, an upfront payment is a scam, and shortened links with urgency hide phishing. It also correctly describes the safe response by stating they will not share or pay and will independently verify the official source. Finally, it clearly refuses to provide real secrets.\"}",
+    "claimed": true
+  },
+  "badges": [
+    {
+      "id": "airdrop",
+      "questId": "3",
+      "badge": "피싱 탐정",
+      "earned": true,
+      "passed": true
+    },
+    {
+      "id": "approval",
+      "questId": "4",
+      "badge": "승인 수호자",
+      "earned": false,
+      "passed": false
+    },
+    {
+      "id": "support",
+      "questId": "5",
+      "badge": "사칭 추적자",
+      "earned": false,
+      "passed": false
+    }
+  ],
+  "transactions": [
+    {
+      "hash": "0xe98d933f400cd09f43df658f1c0e6df140290f7391a3e38fe0545c2a3cc56a84",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": "",
+      "recipient": "0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a",
+      "success": true,
+      "method": "evaluate_submission",
+      "signer": "participant"
+    },
+    {
+      "hash": "0x7b58ab5797ba2668f5a161882c86141b0e807b7428ea1b9bdda54946221bff85",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": "",
+      "recipient": "0x324E86Ca1E8862d5e0d5de2489bb77013945Df7a",
+      "success": true,
+      "method": "claim_points",
+      "signer": "participant"
+    }
+  ],
+  "setupTransactions": [
+    {
+      "hash": "0xffbeef1e11bc813e99fa80a5b8ad7e52cbc7ff8af4642669eeb79ab6969c76d8",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": ""
+    },
+    {
+      "hash": "0x15db43e26204f4dd6e0c933d94f2b15edf961982575905372878e9ceb65d53e2",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": ""
+    },
+    {
+      "hash": "0xe7e42b274570eec89b692294cf105c3dfe947e241b19691011f7636db4f4c79c",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": ""
+    },
+    {
+      "hash": "0x0aeb51ccd2ceb78a9bb95c4aa7a4b379b99f86c6aa94fc34b3a43566e50b6e59",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "returned": true,
+      "error": ""
+    }
+  ],
+  "walletPoints": 150,
+  "sourceMatch": true
+}

@@ -1,0 +1,3 @@
+QUESTPROOF:0x324e86ca1e8862d5e0d5de2489bb77013945df7a:5:0x1b297ef186b58243cea62813ae8720796c67f288
+
+An unlimited token approval can let an approved contract spend tokens up to that allowance, including future deposits, so a malicious spender could take funds. Blind signing can authorize a harmful action without understanding what the wallet is signing. A private key gives direct wallet control and must never be shared even with someone claiming to be support. I would refuse the suspicious request and independently verify the official contract address and the exact permissions before considering any interaction. I would use limited allowances when needed and revoke unnecessary approvals using a trusted independently verified tool.
